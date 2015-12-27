@@ -30,9 +30,9 @@ class Settings
         if($this->cache->hasKey($key))
             return $this->cache->get($key);
 
-        $row = $this->db->table($this->config['table_name'])->where('setting_key', $key)->first(['setting_value']);
-        $value = unserialize($row->setting_value);
+        $value = $this->db->table($this->config['table_name'])->where('setting_key', $key)->value('setting_value');
         if(!is_null($value)) {
+            $value = unserialize($value);
             $this->cache->set($key, $value);
             return $value;
         } else if(null != Config::get($key, null)) {
