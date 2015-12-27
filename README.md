@@ -10,7 +10,7 @@ Require this package with composer ([Packagist](https://packagist.org/packages/p
 or modify your `composer.json`
 
     "require": {
-        "phpzen/laravel-settings": "^0.3"
+        "phpzen/laravel-settings": "^0.4"
     }
 
 then run `composer update`.
