@@ -16,7 +16,7 @@ then run `composer update`.
 
 After installation register the ServiceProvider to the `providers` array in `config/app.php`
 
-    'PHPZen\LaravelSettings\SettingsServiceProvider',
+    PHPZen\LaravelSettings\SettingsServiceProvider::class,
 
 Add an alias for the facade to `aliases` array in  your `config/app.php`
 
@@ -38,4 +38,4 @@ Create the `settings` table
 
 ### License
 
-The Laravel 5 Persistent Settings is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+The Laravel Settings is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
