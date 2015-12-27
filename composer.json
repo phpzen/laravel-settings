@@ -1,0 +1,34 @@
+{
+  "name": "phpzen/laravel-settings",
+  "description": "Persistent settings for Laravel 5",
+  "keywords": [
+    "laravel",
+    "settings"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "PHPZen"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
+    "psr-4": {
+      "PHPZen\\LaravelSettings\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/support": "5.2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PHPZen\\LaravelSettings\\Tests\\": "tests/"
+    }
+  }
+}

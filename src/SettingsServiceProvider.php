@@ -1,0 +1,58 @@
+<?php
+
+namespace PHPZen\LaravelSettings;
+
+use Illuminate\Support\ServiceProvider;
+
+class SettingsServiceProvider extends ServiceProvider
+{
+
+    /**
+     * Indicates if loading of the provider is deferred
+     *
+     * @var bool
+     */
+    protected $defer = false;
+
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/config/settings.php' => config_path('settings.php')
+        ]);
+        $this->publishes([
+            __DIR__ . '/database/migrations/' => base_path('/database/migrations')
+        ]);
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/config/settings.php', 'settings');
+        $this->app['settings'] = $this->app->share(function($app){
+            $config = $app->config->get('settings', [
+                'cache_file' => storage_path('settings.json'),
+                'table_name' => 'settings'
+            ]);
+            return new Settings($app['db'], new Cache($config['cache_file']), $config);
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['settings'];
+    }
+}
