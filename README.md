@@ -1,5 +1,6 @@
 # Laravel Settings
-Persistent settings for Laravel 5
+Persistent settings for Laravel 5.
+Settings are stored in database and cached in file.
 
 ## Installation
 Require this package with composer ([Packagist](https://packagist.org/packages/phpzen/laravel-settings)) using the following command
@@ -26,7 +27,11 @@ Publish the config and migration files
 
     $ php artisan vendor:publish --provider="PHPZen\LaravelSettings\SettingsServiceProvider" --force
 
-`config/settings.php` provides default settings for you. If you need to change `table_name` or `cache_file` add `SETTINGS_TABLE_NAME` and `SETTINGS_CACHE_FILE` to your .env file.
+`config/settings.php` provides default package settings. If you need to change `table_name` or `cache_file` add `SETTINGS_TABLE_NAME` and `SETTINGS_CACHE_FILE` to your .env file.
+    
+    SETTINGS_TABLE_NAME=your_settings_table_name
+    SETTINGS_CACHE_FILE=path_to_settings_cache_file
+    
 If you change `table_name` don't forget to change the table name in the migration file as well.
 
 Create the `settings` table
@@ -35,6 +40,21 @@ Create the `settings` table
 
 ## Usage
 
+### Via Facade
+
+    $value = Settings::get('key'); // get value of setting
+    $value = Settings::get('key', 'default'); // get value of setting or default if key does not exists
+    
+    Settings::set('key', 'value'); // create or update setting
+    
+    Settings::delete('key'); // remove setting
+    
+    Settings::clear(); // clear all settings
+    
+### Via helper
+    
+    $value = settings('key'); // get value of setting
+    $value = settings('key', 'default'); // get value of setting or default if key does not exists
 
 ### License
 
