@@ -46,8 +46,9 @@ class Settings
     {
         $row = $this->db->table($this->config['table_name'])->where('setting_key', $key)->first();
         if(!is_null($row)) {
-            $row->setting_value = serialize($value);
-            $row->save();
+            $this->db->table($this->config['table_name'])->where('setting_key', $key)->update([
+                'setting_value' => serialize($value)
+            ]);
         } else {
             $this->db->table($this->config['table_name'])->insert([
                 'setting_key' => $key,
